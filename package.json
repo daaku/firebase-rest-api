@@ -1,0 +1,35 @@
+{
+  "name": "@daaku/firebase-rest-api",
+  "author": "Naitik Shah <n@daaku.org>",
+  "version": "0.1.0",
+  "description": "Minimal wrapper around fetch to make Firebase REST API calls.",
+  "repository": "git@github.com:daaku/firebase-rest-api",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "prettier": "prettier-config-daaku",
+  "scripts": {
+    "check:types": "tsc --noEmit",
+    "check:lint": "eslint --fix --ignore-pattern dist .",
+    "check": "run-p 'check:*' 'test'",
+    "build:js": "tsc",
+    "build:test": "esbuild --bundle --sourcemap --define:process.env.NODE_ENV=\\\"production\\\" --outdir=dist/bundle test/tests.ts",
+    "test": "npm run build:test && qunit-puppeteer",
+    "build": "run-p check:lint test build:js",
+    "deploy": "npm run build && npm publish --access=public"
+  },
+  "keywords": [
+    "firebase",
+    "api"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@daaku/qunit-puppeteer": "^0.1.1",
+    "@types/qunit": "^2.9.1",
+    "esbuild": "^0.7.1",
+    "eslint": "^7.9.0",
+    "eslint-config-daaku": "^2.0.0",
+    "npm-run-all": "^4.1.5",
+    "qunit": "^2.11.2",
+    "typescript": "^4.0.2"
+  }
+}
