@@ -24,7 +24,7 @@
   "license": "MIT",
   "devDependencies": {
     "@daaku/eslint-config": "^3.4.0",
-    "@daaku/qunit-puppeteer": "^0.2.0",
+    "@daaku/qunit-puppeteer": "^0.3.0",
     "@types/qunit": "^2.9.6",
     "esbuild": "^0.8.14",
     "eslint": "^7.14.0",
