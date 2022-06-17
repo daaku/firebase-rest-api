@@ -13,6 +13,9 @@
       "types": "./dist/src/index.d.ts"
     }
   },
+  "eslintConfig": {
+    "extends": "@daaku"
+  },
   "scripts": {
     "check:types": "tsc --noEmit",
     "check:lint": "eslint --fix --ignore-pattern dist .",
