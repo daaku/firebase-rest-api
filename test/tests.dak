@@ -1,0 +1,14 @@
+(import ["../index.dak" [makeConfig makeFirebaseAPI]])
+
+(const firebaseConfig
+  (makeConfig {:apiKey "AIzaSyCnFgFqO3d7RbJDcNAp_eO21KSOISCP9IU"
+               :projectID "fidb-unit-test"}))
+(const firebaseAPI (makeFirebaseAPI {:config firebaseConfig
+                                     :tokenSource (fn@ [])}))
+(const yodaID "ZogMMcXdX9FhPFgnnJ0n")
+
+(QUnit.test "get yoda"
+  (fn@ [assert]
+    (let [yoda @(firebaseAPI :get `/people/${yodaID}`)]
+      (assert.deepEqual yoda.fields.name.stringValue "yoda" "expect name yoda")
+      (assert.deepEqual yoda.fields.age.integerValue "900" "expect age 900"))))

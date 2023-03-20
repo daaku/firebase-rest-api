@@ -1,8 +1,4 @@
-/.eslintrc.js
+/*.dak
 /.github
-/.vscode
-/dist/bundle
-/dist/test
-/src
+/coverage
 /test
-/tsconfig.json

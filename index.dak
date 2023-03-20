@@ -1,0 +1,39 @@
+; Create a config object with various often used values.
+(fn ^:export makeConfig [{:keys [apiKey projectID]
+                          :or {databaseID "(default)"
+                               host "firestore.googleapis.com"
+                               protocol "https"}}]
+  (let [databasePath `projects/${projectID}/databases/${databaseID}/documents`]
+    {:apiKey apiKey
+     :projectID projectID
+     :databaseID databaseID
+     :host host
+     :protocol protocol
+     :databasePath databasePath
+     :endpointURL `${protocol}://${host}/v1/${databasePath}`}))
+
+; Returns the document path in the form of
+; projects/{project_id}/databases/{database_id}/documents/{document_path}.
+(fn ^:export docPath [config path]
+  `${config.databasePath}/${path}`)
+
+; Make an async API function pre-configured with the endpointURL from the
+; config, which takes a method, path and optional body parameter. It will fetch
+; a token using the async tokenSource function on each API call.
+(fn ^:export makeFirebaseAPI [{:keys [config tokenSource] :or {next fetch}}]
+  (fn@ [method path body]
+    (let [req (Request. (str config.endpointURL path)
+                        {:method method
+                         :body (when body (JSON.stringify body))})]
+      (when-let [token @(tokenSource)]
+        (req.headers.set :Authorization `Bearer ${token}`))
+      (let [res @(next req)
+            data @(res.json)]
+        (if res.ok
+          data
+          (throw
+            (if (Array.isArray data)
+              (if (= data.length 1)
+                (Object.assign (Error.) (. data 0 :error))
+                data)
+              (Object.assign (Error.) data.error))))))))
