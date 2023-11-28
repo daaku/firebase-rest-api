@@ -1,7 +1,7 @@
 {
   "name": "@daaku/firebase-rest-api",
   "author": "Naitik Shah <n@daaku.org>",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Minimal wrapper around fetch to make Firebase REST API calls.",
   "repository": "git@github.com:daaku/firebase-rest-api",
   "license": "MIT",
