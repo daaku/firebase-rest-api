@@ -1,5 +1,5 @@
-/coverage
+/.vscode
 /dist
 /node_modules
 /package-lock.json
-/test/tests.mjs*
+/pnpm-lock.yaml

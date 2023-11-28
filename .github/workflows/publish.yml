@@ -11,11 +11,15 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - name: Setup Node
+      uses: actions/setup-node@v3.6.0
       with:
         node-version: '16'
-    - run: npm install
+        registry-url: 'https://registry.npmjs.org'
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Dependencies
+      run: npm install
     - name: Bump Version
       run: |
         git config --global user.name 'Naitik Shah'
@@ -23,6 +27,6 @@ jobs:
         npm version ${{ github.event.inputs.version }}
         git push && git push --tags
     - name: Publish
-      run: npm publish --access=public
+      run: npm run deploy
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
