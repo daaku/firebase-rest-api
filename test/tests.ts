@@ -1,4 +1,9 @@
+import QUnit from 'qunit';
+import 'qunit/qunit/qunit.css';
 import { FirebaseConfig, makeFirebaseAPI } from '../src/index.js';
+
+// @ts-ignore
+window.HARNESS_RUN_END && QUnit.on('runEnd', window.HARNESS_RUN_END);
 
 const firebaseConfig = new FirebaseConfig({
   apiKey: 'AIzaSyCnFgFqO3d7RbJDcNAp_eO21KSOISCP9IU',
