@@ -1,33 +1,33 @@
-import QUnit from 'qunit';
-import 'qunit/qunit/qunit.css';
-import { FirebaseConfig, makeFirebaseAPI } from '../src/index.js';
+import QUnit from 'qunit'
+import 'qunit/qunit/qunit.css'
+import { FirebaseConfig, makeFirebaseAPI } from '../src/index.js'
 
 // @ts-ignore
-window.HARNESS_RUN_END && QUnit.on('runEnd', window.HARNESS_RUN_END);
+window.HARNESS_RUN_END && QUnit.on('runEnd', window.HARNESS_RUN_END)
 
 const firebaseConfig = new FirebaseConfig({
   apiKey: 'AIzaSyCnFgFqO3d7RbJDcNAp_eO21KSOISCP9IU',
   projectID: 'fidb-unit-test',
-});
+})
 const firebaseAPI = makeFirebaseAPI({
   config: firebaseConfig,
   tokenSource: async () => {
-    return undefined;
+    return undefined
   },
-});
+})
 
-QUnit.test('get yoda', async (assert) => {
-  const yodaID = 'ZogMMcXdX9FhPFgnnJ0n';
+QUnit.test('get yoda', async assert => {
+  const yodaID = 'ZogMMcXdX9FhPFgnnJ0n'
   const yoda = (await firebaseAPI('get', `/people/${yodaID}`)) as {
     fields: {
       name: {
-        stringValue: string;
-      };
+        stringValue: string
+      }
       age: {
-        integerValue: string;
-      };
-    };
-  };
-  assert.deepEqual(yoda.fields.name.stringValue, 'yoda', 'expect name yoda');
-  assert.deepEqual(yoda.fields.age.integerValue, '900', 'expect age 900');
-});
+        integerValue: string
+      }
+    }
+  }
+  assert.deepEqual(yoda.fields.name.stringValue, 'yoda', 'expect name yoda')
+  assert.deepEqual(yoda.fields.age.integerValue, '900', 'expect age 900')
+})
