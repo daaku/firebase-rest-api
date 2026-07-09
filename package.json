@@ -34,7 +34,7 @@
     "@daaku/qunit-puppeteer": "^4.1.0",
     "@types/qunit": "^2.19.13",
     "qunit": "^2.25.0",
-    "typescript": "^6.0.2",
+    "typescript": "^7.0.2",
     "vite": "^8.0.3"
   }
 }
